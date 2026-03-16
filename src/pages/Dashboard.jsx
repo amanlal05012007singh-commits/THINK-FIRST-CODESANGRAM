@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../co
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Progress } from '../components/ui/Progress';
-import { BrainCircuit, BookOpen, Flame, Target, AlertTriangle, ChevronRight } from 'lucide-react';
+import { BrainCircuit, BookOpen, Flame, Target, AlertTriangle, ChevronRight, Lightbulb, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
@@ -29,8 +29,8 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="border-border">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">ThinkScore</CardTitle>
-              <BrainCircuit className="h-5 w-5 text-primary" />
+              <CardTitle className="text-sm font-medium text-muted-foreground">Practice Score</CardTitle>
+              <Trophy className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold">82<span className="text-muted-foreground text-lg font-normal">/100</span></div>
@@ -62,7 +62,7 @@ export default function Dashboard() {
 
           <Card className="border-border bg-primary/5 border-primary/20">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-primary">Reasoning Accuracy</CardTitle>
+              <CardTitle className="text-sm font-medium text-primary">Accuracy Rate</CardTitle>
               <Target className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
@@ -78,24 +78,24 @@ export default function Dashboard() {
             <CardHeader>
               <CardTitle className="text-xl flex items-center">
                 <AlertTriangle className="mr-2 h-5 w-5 text-yellow-500" /> 
-                Thinking Patterns
+                Learning Insights
               </CardTitle>
-              <CardDescription>AI analysis of your problem-solving behavior</CardDescription>
+              <CardDescription>Based on your recent practice sessions</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 space-y-6">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-sm">Formula Jumper</span>
+                  <span className="font-semibold text-sm">Skipping Steps</span>
                   <Badge variant="warning">Frequent</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded-md border border-border">
-                  "You often skip concept identification and jump directly to formulas. Try to pause and identify the core physical concept first."
+                  "You often skip concept identification and jump directly to formulas. Try to pause and identify the core concept first."
                 </p>
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-sm">Calculation Error Pattern</span>
+                  <span className="font-semibold text-sm">Calculation Errors</span>
                   <Badge variant="destructive">Needs Work</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded-md border border-border">
@@ -135,8 +135,8 @@ export default function Dashboard() {
           {/* Thinking Heatmap */}
           <Card className="lg:col-span-2 border-border shadow-sm">
             <CardHeader>
-              <CardTitle className="text-xl">Thinking Heatmap</CardTitle>
-              <CardDescription>Visualizing your reasoning performance across topics</CardDescription>
+              <CardTitle className="text-xl">Skill Mastery Matrix</CardTitle>
+              <CardDescription>Visualizing your performance across topics</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
@@ -203,9 +203,9 @@ export default function Dashboard() {
               </div>
               
               <div className="mt-6 p-4 bg-muted/40 rounded-lg flex items-start space-x-3">
-                <BrainCircuit className="h-5 w-5 text-primary mt-0.5" />
+                <Lightbulb className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <h4 className="text-sm font-semibold mb-1">AI Coach Insight</h4>
+                  <h4 className="text-sm font-semibold mb-1">Study Recommendation</h4>
                   <p className="text-sm text-muted-foreground">
                     You have strong conceptual understanding in Physics but struggle with Integration in Math. Let's focus on identifying the correct substitution pattern before writing integrals. 
                   </p>
