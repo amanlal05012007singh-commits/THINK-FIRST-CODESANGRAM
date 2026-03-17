@@ -9,29 +9,50 @@ import { useNavigate, useParams } from 'react-router-dom';
 export default function Topics() {
   const navigate = useNavigate();
   const { subject } = useParams();
+  const [selectedClass, setSelectedClass] = React.useState("Class 12");
+
+  React.useEffect(() => {
+    const storedClass = localStorage.getItem('thinkfirst_user_class');
+    if (storedClass) {
+      setSelectedClass(storedClass);
+    }
+  }, []);
 
   // Mock data based on route param
   const subjectName = subject === 'mathematics' ? 'Mathematics' : subject === 'chemistry' ? 'Physical Chemistry' : 'Physics';
   
   const allTopics = {
     physics: [
-      { id: 'electrostatics', name: 'Electrostatics', difficulty: 'Hard', questions: 45, mastered: false, progress: 40 },
-      { id: 'current-electricity', name: 'Current Electricity', difficulty: 'Medium', questions: 38, mastered: true, progress: 100 },
-      { id: 'friction', name: 'Friction & Mechanics', difficulty: 'Medium', questions: 52, mastered: false, progress: 15 },
+      { id: 'light-reflection', name: 'Light - Reflection & Refraction', difficulty: 'Medium', questions: 35, mastered: false, progress: 10, targetClass: 'Class 10' },
+      { id: 'electricity-10', name: 'Electricity', difficulty: 'Hard', questions: 40, mastered: false, progress: 0, targetClass: 'Class 10' },
+      { id: 'kinematics', name: 'Kinematics', difficulty: 'Medium', questions: 50, mastered: false, progress: 20, targetClass: 'Class 11' },
+      { id: 'thermodynamics-phys', name: 'Thermodynamics', difficulty: 'Hard', questions: 45, mastered: false, progress: 0, targetClass: 'Class 11' },
+      { id: 'electrostatics', name: 'Electrostatics', difficulty: 'Hard', questions: 45, mastered: false, progress: 40, targetClass: 'Class 12' },
+      { id: 'current-electricity', name: 'Current Electricity', difficulty: 'Medium', questions: 38, mastered: true, progress: 100, targetClass: 'Class 12' },
+      { id: 'friction', name: 'Friction & Mechanics', difficulty: 'Medium', questions: 52, mastered: false, progress: 15, targetClass: 'Class 12' },
     ],
     mathematics: [
-      { id: 'integration', name: 'Integration', difficulty: 'Hard', questions: 60, mastered: false, progress: 20 },
-      { id: 'matrices', name: 'Matrices', difficulty: 'Easy', questions: 30, mastered: true, progress: 100 },
-      { id: 'probability', name: 'Probability', difficulty: 'Medium', questions: 45, mastered: false, progress: 50 },
+      { id: 'quadratics', name: 'Quadratic Equations', difficulty: 'Medium', questions: 40, mastered: false, progress: 10, targetClass: 'Class 10' },
+      { id: 'trigonometry-10', name: 'Introduction to Trigonometry', difficulty: 'Hard', questions: 45, mastered: false, progress: 0, targetClass: 'Class 10' },
+      { id: 'sets', name: 'Sets', difficulty: 'Easy', questions: 30, mastered: true, progress: 100, targetClass: 'Class 11' },
+      { id: 'limits', name: 'Limits and Derivatives', difficulty: 'Hard', questions: 50, mastered: false, progress: 5, targetClass: 'Class 11' },
+      { id: 'integration', name: 'Integration', difficulty: 'Hard', questions: 60, mastered: false, progress: 20, targetClass: 'Class 12' },
+      { id: 'matrices', name: 'Matrices', difficulty: 'Easy', questions: 30, mastered: true, progress: 100, targetClass: 'Class 12' },
+      { id: 'probability', name: 'Probability', difficulty: 'Medium', questions: 45, mastered: false, progress: 50, targetClass: 'Class 12' },
     ],
     chemistry: [
-      { id: 'thermodynamics', name: 'Thermodynamics', difficulty: 'Hard', questions: 55, mastered: false, progress: 10 },
-      { id: 'mole-concept', name: 'Mole Concept', difficulty: 'Medium', questions: 40, mastered: true, progress: 100 },
-      { id: 'chemical-equilibrium', name: 'Chemical Equilibrium', difficulty: 'Hard', questions: 48, mastered: false, progress: 5 },
+      { id: 'chemical-reactions', name: 'Chemical Reactions', difficulty: 'Easy', questions: 30, mastered: false, progress: 10, targetClass: 'Class 10' },
+      { id: 'acids-bases', name: 'Acids, Bases and Salts', difficulty: 'Medium', questions: 35, mastered: false, progress: 0, targetClass: 'Class 10' },
+      { id: 'equilibrium-11', name: 'Equilibrium', difficulty: 'Hard', questions: 50, mastered: false, progress: 10, targetClass: 'Class 11' },
+      { id: 'structure-atom', name: 'Structure of Atom', difficulty: 'Medium', questions: 45, mastered: true, progress: 100, targetClass: 'Class 11' },
+      { id: 'thermodynamics', name: 'Thermodynamics', difficulty: 'Hard', questions: 55, mastered: false, progress: 10, targetClass: 'Class 12' },
+      { id: 'mole-concept', name: 'Mole Concept', difficulty: 'Medium', questions: 40, mastered: true, progress: 100, targetClass: 'Class 12' },
+      { id: 'chemical-equilibrium', name: 'Chemical Equilibrium', difficulty: 'Hard', questions: 48, mastered: false, progress: 5, targetClass: 'Class 12' },
     ]
   };
 
-  const topics = allTopics[subject] || allTopics.physics;
+  const subjectTopics = allTopics[subject] || allTopics.physics;
+  const topics = subjectTopics.filter(topic => topic.targetClass === selectedClass);
 
   const getDifficultyColor = (diff) => {
     switch(diff) {
