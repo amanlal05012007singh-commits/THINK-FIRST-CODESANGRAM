@@ -427,16 +427,14 @@ export default function QuestionPractice() {
           )}
 
           {/* Analytics View Toggle Button */}
-          {solutionStep >= 4 && (
-             <Button 
-                variant="outline" 
-                className="w-full mt-4 flex items-center justify-center gap-2 border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 rounded-xl py-5 font-semibold animate-in fade-in-50 duration-300"
-                onClick={() => setShowAnalytics(!showAnalytics)}
-             >
-                <BarChart2 className="h-4 w-4" />
-                {showAnalytics ? "Hide Performance Analytics" : "View Performance Analytics"}
-             </Button>
-          )}
+          <Button 
+             variant="outline" 
+             className="w-full mt-4 flex items-center justify-center gap-2 border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 rounded-xl py-5 font-semibold animate-in fade-in-50 duration-300"
+             onClick={() => setShowAnalytics(!showAnalytics)}
+          >
+             <BarChart2 className="h-4 w-4" />
+             {showAnalytics ? "Hide Performance Analytics" : "View Performance Analytics"}
+          </Button>
 
           {/* Live System Diagnostics Feedback Panel */}
           {showAnalytics && (
