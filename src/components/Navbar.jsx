@@ -169,7 +169,13 @@ function UserProfileDropdown() {
 
 export function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const isLoginPage = location.pathname === '/login' || location.pathname === '/signup';
+
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    setIsAuth(!!localStorage.getItem('thinkfirst_user_name'));
+  }, [location.pathname]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -179,23 +185,29 @@ export function Navbar() {
           <span className="font-bold text-xl tracking-tight text-primary">ThinkFirst</span>
         </Link>
         
-        {!isLoginPage && (
+        {!isLoginPage && isAuth && (
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-muted-foreground">
             <Link to="/dashboard" className={`transition-colors hover:text-foreground ${location.pathname === '/dashboard' ? 'text-foreground' : ''}`}>Dashboard</Link>
             <Link to="/subjects" className={`transition-colors hover:text-foreground ${location.pathname.startsWith('/subjects') || location.pathname.startsWith('/topics') ? 'text-foreground' : ''}`}>Practice</Link>
-            <Link to="/profile" className={`transition-colors hover:text-foreground ${location.pathname === '/profile' ? 'text-foreground' : ''}`}>Profile</Link>
           </nav>
         )}
 
         <div className="flex items-center space-x-3">
           {!isLoginPage ? (
-            <>
-              <SettingsDropdown />
-              <div className="w-px h-6 bg-border mx-1"></div>
-              <UserProfileDropdown />
-            </>
+            isAuth ? (
+               <>
+                 <SettingsDropdown />
+                 <div className="w-px h-6 bg-border mx-1"></div>
+                 <UserProfileDropdown />
+               </>
+            ) : (
+               <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" className="font-semibold text-sm" onClick={() => navigate('/login')}>Log In</Button>
+                  <Button size="sm" className="rounded-xl font-semibold text-sm shadow-sm" onClick={() => navigate('/signup')}>Sign Up</Button>
+               </div>
+            )
           ) : (
-            null // Can add a simple theme toggle for login pages if desired
+            null 
           )}
         </div>
       </div>
