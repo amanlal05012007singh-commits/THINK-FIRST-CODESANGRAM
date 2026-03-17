@@ -13,6 +13,15 @@ import QuestionPractice from './pages/QuestionPractice';
 import SavedQuestions from './pages/SavedQuestions';
 import Leaderboard from './pages/Leaderboard';
 
+// Protected Route Wrapper
+const ProtectedRoute = ({ children }) => {
+  const user = localStorage.getItem('thinkfirst_user_name');
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="thinkfirst-theme">
@@ -21,12 +30,12 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/subjects" element={<Subjects />} />
-          <Route path="/topics/:subject" element={<Topics />} />
-          <Route path="/practice/:topic" element={<QuestionPractice />} />
-          <Route path="/saved-questions" element={<SavedQuestions />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/subjects" element={<ProtectedRoute><Subjects /></ProtectedRoute>} />
+          <Route path="/topics/:subject" element={<ProtectedRoute><Topics /></ProtectedRoute>} />
+          <Route path="/practice/:topic" element={<ProtectedRoute><QuestionPractice /></ProtectedRoute>} />
+          <Route path="/saved-questions" element={<ProtectedRoute><SavedQuestions /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

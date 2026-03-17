@@ -427,7 +427,7 @@ export default function QuestionPractice() {
           )}
 
           {/* Analytics View Toggle Button */}
-          {solutionStep >= 4 && currentQuestion.ideal && (
+          {solutionStep >= 4 && (
              <Button 
                 variant="outline" 
                 className="w-full mt-4 flex items-center justify-center gap-2 border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 rounded-xl py-5 font-semibold animate-in fade-in-50 duration-300"
@@ -439,7 +439,7 @@ export default function QuestionPractice() {
           )}
 
           {/* Live System Diagnostics Feedback Panel */}
-          {showAnalytics && currentQuestion.ideal && (
+          {showAnalytics && (
              <Card className="border border-primary/20 bg-muted/20 shadow-sm mt-6">
                 <CardHeader className="py-3 px-4 flex flex-row items-center justify-between border-b bg-background">
                    <div className="flex items-center gap-2">
